@@ -25,14 +25,14 @@ class TestBasics(unittest.TestCase):
         result = rpn.calculate("3 2 //")
         self.assertEqual(1, result)
     def test_percentage(self):
-        result = rpn.calculate("72 + 5%")
+        result = rpn.calculate("72 + 5 %")
         self.assertEqual(75.6, result)
     def test_bitwise_and(self):
-        result = rpn.calculate("5 & 7")
+        result = rpn.calculate("5 7 &")
         self.assertEqual(5, result)
     def test_bitwise_or(self):
-        result = rpn.calculate("5 | 7")
+        result = rpn.calculate("5 7 |")
         self.assertEqual(7, result)
     def test_bitwise_not(self):
-        result = rpn.calculate("~ 5")
+        result = rpn.calculate("5 ~")
         self.assertEqual(-6, result)
