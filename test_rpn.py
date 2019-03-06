@@ -18,3 +18,11 @@ class TestBasics(unittest.TestCase):
     def test_exponent(self):
         result = rpn.calculate("2 3 ^")
         self.assertEqual(8, result)
+    def test_copy(self):
+        try:
+            result = rpn.calculate("2 copy +")
+        except KeyError:
+            print("Caught Error")
+        self.assertEqual(4, result)
+        
+        
