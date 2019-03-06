@@ -11,8 +11,9 @@ operators = {
     '^': operator.pow,
 }
 
+stack = list()
+
 def calculate(myarg):
-    stack = list()
     for token in myarg.split():
         try:
             token = int(token)
@@ -21,12 +22,16 @@ def calculate(myarg):
             function = operators[token]
             arg2 = stack.pop()
             arg1 = stack.pop()
-            result = function(arg1, arg2)
-            stack.append(result)
-        print(stack)
-    if len(stack) != 1:
-        raise TypeError("Too many parameters")
-    return stack.pop()
+            try:
+                result = function(arg1, arg2)
+                stack.append(result)
+                print(stack)
+                if len(stack) != 1:
+                    raise TypeError("Too many parameters")
+                return stack.pop()
+            except ZeroDivisionError:
+                print("Do not divide by zero")
+       
 
 def main():
     while True:
