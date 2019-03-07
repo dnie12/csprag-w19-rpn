@@ -21,8 +21,10 @@ class TestBasics(unittest.TestCase):
     def test_copy(self):
         try:
             result = rpn.calculate("2 copy +")
+            self.assertEqual(4, result)
         except KeyError:
             print("Caught Error")
-        self.assertEqual(4, result)
+            
+        
         
         
