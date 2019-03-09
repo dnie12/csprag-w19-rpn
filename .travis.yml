@@ -2,15 +2,10 @@ language: python
 python:
   - "3.5"
 install:
-  - pip install -e . --use-mirrors
-before_script:
-  - pip install -r test_requirements.txt --use-mirrors
-  - git clone https://github.com/z4r/python-coveralls-example.git
-  - cd python-coveralls-example
-  - git checkout -qf 17b8119796516195527dcb4f454a2ebd41d60244
-  - py.test example/tests.py --cov=example
-  - cd -
+  - pip install coveralls
+  - pip install pytest
+  - pip install pytest-cov
 script:
-        - python3 -m --cov=unittest
+        - py.test test_rpn.py --cov 
 after_success:
   - coveralls
