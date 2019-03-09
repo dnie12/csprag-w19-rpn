@@ -9,7 +9,25 @@ operators = {
     '*': operator.mul,
     '/': operator.truediv,
     '^': operator.pow,
+    '&': operator.and_,
+    '|': operator.or_,
+    '~': operator.invert,
+    '//': operator.floordiv,
 }
+
+def factorial(arg1):
+    value = arg1
+    arg1 -= 1
+    while(arg1 > 0):
+        value *= arg1
+        arg1 -= 1
+    return value
+
+def percentage(arg1, arg2):
+    value = arg1
+    value = arg1 * arg2/100
+    return value
+
 
 def calculate(myarg):
     stack = list()
@@ -18,11 +36,31 @@ def calculate(myarg):
             token = int(token)
             stack.append(token)
         except ValueError:
-            function = operators[token]
-            arg2 = stack.pop()
-            arg1 = stack.pop()
-            result = function(arg1, arg2)
-            stack.append(result)
+            if token is '!':
+                arg1 = stack.pop()
+                result = factorial(arg1)
+                stack.append(result)
+            elif token is '%':
+                arg2 = stack.pop()
+                func = stack.pop()
+                arg1 = stack.pop()
+                function = operators[func]
+                arg2 = percentage(arg1, arg2)
+                result = function(arg1, arg2)
+                stack.append(result)
+            elif len(stack) is 1 and token is not '~':
+                stack.append(token)
+            else:
+                function = operators[token]
+                if token is '~':
+                    arg1 = stack.pop()
+                    result = function(arg1)
+                    stack.append(result)
+                else:
+                    arg2 = stack.pop()
+                    arg1 = stack.pop()
+                    result = function(arg1, arg2)
+                    stack.append(result)
         print(stack)
     if len(stack) != 1:
         raise TypeError("Too many parameters")
