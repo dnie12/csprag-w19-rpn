@@ -6,6 +6,6 @@ install:
   - pip install pytest
   - pip install pytest-cov
 script:
-        - py.test --cov=test_rpn 
+        - py.test --cov=rpn 
 after_success:
   - coveralls
